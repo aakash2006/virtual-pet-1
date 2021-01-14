@@ -22,33 +22,48 @@ function setup() {
 function draw() 
 {  
 background(46,139,87);
+if(keyWentDown(UP_ARROW))
+{
+ writeStock(foodS);
+ dog.addImage(happyDogImg);
+}
+
 drawSprites();
 fill('white');
 text("food remaining: "+foodS,170,150);
 textSize(20);
 fill("white");
 text("press up arrow to feed drago!",170,120);
-
-if(keyWentDown(UP_ARROW))
-{
- writeStock(foodS);
- foodS = foodS-1;
- dog.addImage(happyDogImg);
 }
- 
 
 
-}
+
+
+
+
 function readStock(data)
 {
  foodS = data.val();
 }
+
 function writeStock(x)
 {
- database.ref('/').update({
-   Food:x
- })
-
+  console.log("first"+x);
+  if(x<=0)
+  {
+   x = 0
+   console.log("before else"+x);
+  }
+  else
+  {
+    x = x-1
+    console.log("after else"+x);
+  }
+  database.ref('/').update({
+    Food:x
+  })
+ console.log(x);
+ 
  
 }
 
